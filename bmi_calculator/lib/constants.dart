@@ -15,5 +15,5 @@ const kNumberTxtStyle = TextStyle(fontSize: 50.0, fontWeight: FontWeight.w900);
 const kLargeButton = TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
 const ktitletext = TextStyle(fontSize: 50,fontWeight: FontWeight.bold);
 const ktstyle =TextStyle(fontSize: 22,fontWeight: FontWeight.bold, color: Color(0xFF24D876));
-const kbmitstyle = TextStyle(fontSize: 100,fontFamily: 'Lobster');//fontWeight: FontWeight.bold);
-const kBodytxt = TextStyle(fontSize: 22,fontFamily: 'Diplomata');//);
+const kbmitstyle = TextStyle(fontSize: 100,fontWeight: FontWeight.bold);
+const kBodytxt = TextStyle(fontSize: 22);
