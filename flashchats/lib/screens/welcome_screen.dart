@@ -1,10 +1,9 @@
 import 'package:flashchats/screens/login_screen.dart';
 import 'package:flashchats/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flashchats/screens/login_screen.dart';
-import 'package:flashchats/screens/registration_screen.dart';
- import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flashchats/components/rounded_button.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'Welcome_Screen';

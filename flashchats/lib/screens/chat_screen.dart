@@ -1,11 +1,15 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flashchats/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+
 
 final _firestore = FirebaseFirestore.instance;
+final _auth = FirebaseAuth.instance;
 User loggedInuser;
+
+bool desc = false;
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
@@ -16,7 +20,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
 
-  final _auth = FirebaseAuth.instance;
+
   String messageText;
 
   @override
@@ -44,7 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: null,
-        actions: <Widget>[
+        actions: [
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
@@ -84,8 +88,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         'sender': loggedInuser.email,
                         'positionId': Timestamp.now().toDate(),
 
-
-
                       });
                     },
                     child: Text(
@@ -111,7 +113,7 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('messages').snapshots(),
+        stream: _firestore.collection('messages').orderBy("positionId", descending: desc).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -125,6 +127,10 @@ class MessagesStream extends StatelessWidget {
           for (var message in messages){
             convertedMessages.add(message);
 
+
+          // .collection("messages")
+          //     .orderBy("", "desc")
+
           }
 
           List<MessageBubble> messageBubbles = [];
@@ -132,16 +138,15 @@ class MessagesStream extends StatelessWidget {
             var messagedata = message.data() as Map<String, dynamic>;
             final messageText = messagedata['text'];
             final messageSender = messagedata['sender'];
-            final messagetime = messagedata['positionid'];
-
+            final messagetime = messagedata['positionId'];
             final currentUser  = loggedInuser.email;
-
             final messageBubble = MessageBubble(
               sender: messageSender,
               text: messageText,
               isMe: currentUser == messageSender,
-              positionid: messagetime,
+              positionid: messagetime.toDate(),
             );
+            print('time is ${messagetime.toDate()}');
 
             // messageWidgets.add(messageWidget);
             // print(messageWidgets);
@@ -161,13 +166,12 @@ class MessagesStream extends StatelessWidget {
 
 class MessageBubble extends StatelessWidget {
   // const MessageBubble({Key? key}) : super(key: key);\
-  MessageBubble({this.sender, this.text, this.isMe, this.positionid});
+  MessageBubble({ this.sender, this.text, this.isMe, this.positionid});
 
   final String sender;
   final String text;
   final bool isMe;
   var positionid;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -192,13 +196,13 @@ class MessageBubble extends StatelessWidget {
               // use a ternary operation ( ? )
               color: isMe ? Colors.lightBlueAccent: Colors.white,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: Text(
                   text,
                   style: TextStyle(fontSize: 15.0, color: isMe ? Colors.white: Colors.black54),
                 ),
               )),
-          Text(positionid),
+          Text(DateFormat('MMMM-dd AT hh:mm a').format(positionid)),
         ],
       ),
     );
