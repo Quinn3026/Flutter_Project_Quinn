@@ -1,0 +1,46 @@
+[
+  {
+    "Name": "Brewed Coffee",
+    "Type": "HotCoffee",
+    "Calories": "4 Calories",
+    "Price": 35,
+    "Images": "images/HotBrewedCoffee.png"
+  },
+  {
+    "Name": "Espresso Macchiato",
+    "Type": "HotCoffee",
+    "Calories": "10 Calories",
+    "Price": 45,
+    "Images": "images/EspressoMacchiato.png"
+  },
+  {
+    "Name": "Flat White",
+    "Type": "HotCoffee",
+    "Calories": "155 Calories",
+    "Price": 45,
+    "Images": "images/FlatWhite.png"
+  },
+
+  {
+    "Name": "Caramel Macchiato ",
+    "Type": "IcedCoffee",
+    "Calories": "178 Calories",
+    "Price": 78,
+
+    "Images": "images/IcedCaramelMacchiato.png"
+  },
+  {
+    "Name": "Brewed ",
+    "Type": "IcedCoffee",
+    "Calories": "3 Calories",
+    "Price": 58,
+    "Images": "images/IcedBrewed.png"
+  },
+  {
+    "Name": "Cafe Latte",
+    "Type": "IcedCoffee",
+    "Calories": "119 Calories",
+    "Price": 68,
+    "Images": "images/IcedCaffeLatte.png"
+  }
+]
